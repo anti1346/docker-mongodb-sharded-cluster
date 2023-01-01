@@ -68,7 +68,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
-    command: mongod --configsvr --replSet configReplica --port 27017 --dbpath /data/db
+    command: mongod --configsvr --replSet configReplica --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/config1:/data/db
     ports:
@@ -81,7 +81,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
-    command: mongod --configsvr --replSet configReplica --port 27017 --dbpath /data/db
+    command: mongod --configsvr --replSet configReplica --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/config2:/data/db
     ports:
@@ -94,7 +94,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
-    command: mongod --configsvr --replSet configReplica --port 27017 --dbpath /data/db
+    command: mongod --configsvr --replSet configReplica --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/config3:/data/db
     ports:
@@ -115,6 +115,10 @@ services:
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo11:/data/db
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 20011:27017
 
@@ -130,6 +134,10 @@ services:
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo12:/data/db
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 20012:27017
 
@@ -145,6 +153,10 @@ services:
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo13:/data/db
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 20013:27017
 
@@ -160,6 +172,10 @@ services:
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo21:/data/db
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 20021:27017
 
@@ -175,6 +191,10 @@ services:
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo22:/data/db
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 20022:27017
 
@@ -190,6 +210,10 @@ services:
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo23:/data/db
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 20023:27017
 
@@ -212,5 +236,5 @@ services:
 
 
 ### docker network create mongo-net
-networks:
-  mongo-net:
+#networks:
+#  mongo-net:
