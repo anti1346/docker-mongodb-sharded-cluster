@@ -3,7 +3,7 @@ services:
 
   # Mongos Servers
   mongos1:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: mongos1
     restart: unless-stopped
     env_file:
@@ -17,7 +17,7 @@ services:
       - 27017:27017
 
   mongos2:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: mongos2
     restart: unless-stopped
     env_file:
@@ -31,7 +31,7 @@ services:
       - 27018:27017
 
   mongos3:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: mongos3
     restart: unless-stopped
     env_file:
@@ -46,7 +46,7 @@ services:
 
   ### Mongodb Config Servers
   config1:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: config1
     restart: unless-stopped
     environment:
@@ -60,7 +60,7 @@ services:
       - mongo-net
 
   config2:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: config2
     restart: unless-stopped
     environment:
@@ -74,7 +74,7 @@ services:
       - mongo-net
 
   config3:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: config3
     restart: unless-stopped
     environment:
@@ -89,7 +89,7 @@ services:
 
   ### Mongodb Shard Servers
   shard1primary:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
     env_file:
@@ -105,7 +105,7 @@ services:
       - mongo-net
 
   shard1secondary:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
     env_file:
@@ -121,7 +121,7 @@ services:
       - mongo-net
 
   shard1arbiter:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
     env_file:
@@ -137,14 +137,14 @@ services:
       - mongo-net
 
   shard2primary:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
     env_file:
       - .env
     environment:
       - TZ=Asia/Seoul
-    command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
+    command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo21:/data/db
     ports:
@@ -153,14 +153,14 @@ services:
       - mongo-net
 
   shard2secondary:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
     env_file:
       - .env
     environment:
       - TZ=Asia/Seoul
-    command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
+    command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo22:/data/db
     ports:
@@ -169,14 +169,14 @@ services:
       - mongo-net
 
   shard2arbiter:
-    image: mongo:MONGE_TAG
+    image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
     env_file:
       - .env
     environment:
       - TZ=Asia/Seoul
-    command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
+    command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo23:/data/db
     ports:
