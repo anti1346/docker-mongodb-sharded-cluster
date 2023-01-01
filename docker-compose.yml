@@ -15,6 +15,8 @@ services:
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
     ports:
       - 27017:27017
+    networks:
+      - mongo-net
 
   mongos2:
     image: mongo:${MONGE_TAG}
@@ -29,6 +31,8 @@ services:
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
     ports:
       - 27018:27017
+    networks:
+      - mongo-net
 
   mongos3:
     image: mongo:${MONGE_TAG}
@@ -43,6 +47,8 @@ services:
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
     ports:
       - 27019:27017
+  networks:
+    - mongo-net
 
   ### Mongodb Config Servers
   config1:
