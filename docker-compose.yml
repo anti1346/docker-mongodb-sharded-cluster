@@ -195,5 +195,6 @@ services:
 #      - mongo-net
 
 
+### docker network create mongo-net
 networks:
   mongo-net:
