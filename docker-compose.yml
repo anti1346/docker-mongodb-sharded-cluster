@@ -93,6 +93,7 @@ services:
   config3:
     image: mongo:${MONGE_TAG}
     container_name: config3
+    hostname: config3
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
@@ -108,9 +109,9 @@ services:
   ### Mongodb Shard Servers
   shard11:
     image: mongo:${MONGE_TAG}
-    container_name: shard1primary
+    container_name: shard11
     hostname: shard11
-    restart: shard11
+    restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
@@ -134,9 +135,9 @@ services:
 
   shard13:
     image: mongo:${MONGE_TAG}
-    container_name: shard1arbiter
+    container_name: shard13
     hostname: shard13
-    restart: shard13
+    restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
