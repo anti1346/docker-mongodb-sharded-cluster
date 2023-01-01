@@ -106,82 +106,82 @@ services:
 ######################################################################################################################
 ######################################################################################################################
   ### Mongodb Shard Servers
-  shard1primary:
+  shard11:
     image: mongo:${MONGE_TAG}
     container_name: shard1primary
-    hostname: shard1primary
-    restart: unless-stopped
+    hostname: shard11
+    restart: shard11
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
-      - ./mongodb/data-mongo11:/data/db
+      - ./mongodb/data-shard11:/data/db
     ports:
       - 20011:27017
 
-  shard1secondary:
+  shard12:
     image: mongo:${MONGE_TAG}
-    container_name: shard1secondary
-    hostname: shard1secondary
+    container_name: shard12
+    hostname: shard12
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
-      - ./mongodb/data-mongo12:/data/db
+      - ./mongodb/data-shard12:/data/db
     ports:
       - 20012:27017
 
-  shard1arbiter:
+  shard13:
     image: mongo:${MONGE_TAG}
     container_name: shard1arbiter
-    hostname: shard1arbiter
-    restart: unless-stopped
+    hostname: shard13
+    restart: shard13
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
-      - ./mongodb/data-mongo13:/data/db
+      - ./mongodb/data-shard13:/data/db
     ports:
       - 20013:27017
 
 
-  shard2primary:
+  shard21:
     image: mongo:${MONGE_TAG}
-    container_name: shard2primary
-    hostname: shard2primary
+    container_name: shard21
+    hostname: shard21
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
-      - ./mongodb/data-mongo21:/data/db
+      - ./mongodb/data-shard21:/data/db
     ports:
       - 20021:27017
 
-  shard2secondary:
+  shard22:
     image: mongo:${MONGE_TAG}
-    container_name: shard2secondary
-    hostname: shard2secondary
+    container_name: shard22
+    hostname: shard22
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
-      - ./mongodb/data-mongo22:/data/db
+      - ./mongodb/data-shard22:/data/db
     ports:
       - 20022:27017
 
-  shard2arbiter:
+  shard23:
     image: mongo:${MONGE_TAG}
-    container_name: shard2arbiter
-    hostname: shard2arbiter
+    container_name: shard23
+    hostname: shard23
     restart: unless-stopped
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
-      - ./mongodb/data-mongo23:/data/db
+      - ./mongodb/data-shard23:/data/db
     ports:
       - 20023:27017
 
@@ -190,6 +190,7 @@ services:
   mongo-express:
     image: mongo-express:latest
     container_name: mongo-express
+    hostname: mongo-express
     restart: always
     environment:
 #      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongos1:27017/
