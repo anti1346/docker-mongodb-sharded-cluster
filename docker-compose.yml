@@ -15,8 +15,7 @@ services:
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
     ports:
       - 27017:27017
-    networks:
-      - mongo-net
+
 
   mongos2:
     image: mongo:${MONGE_TAG}
@@ -31,8 +30,7 @@ services:
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
     ports:
       - 27018:27017
-    networks:
-      - mongo-net
+
 
   mongos3:
     image: mongo:${MONGE_TAG}
@@ -47,8 +45,7 @@ services:
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
     ports:
       - 27019:27017
-    networks:
-      - mongo-net
+
 
   ### Mongodb Config Servers
   config1:
@@ -62,8 +59,7 @@ services:
       - ./mongodb/config1:/data/db
     ports:
       - 10011:27017
-    networks:
-      - mongo-net
+
 
   config2:
     image: mongo:${MONGE_TAG}
@@ -76,8 +72,7 @@ services:
       - ./mongodb/config2:/data/db
     ports:
       - 10012:27017
-    networks:
-      - mongo-net
+
 
   config3:
     image: mongo:${MONGE_TAG}
@@ -90,8 +85,7 @@ services:
       - ./mongodb/config3:/data/db
     ports:
       - 10013:27017
-    networks:
-      - mongo-net
+
 
   ### Mongodb Shard Servers
   shard1primary:
@@ -107,8 +101,7 @@ services:
       - ./mongodb/data-mongo11:/data/db
     ports:
       - 20011:27017
-    networks:
-      - mongo-net
+
 
   shard1secondary:
     image: mongo:${MONGE_TAG}
@@ -123,8 +116,7 @@ services:
       - ./mongodb/data-mongo12:/data/db
     ports:
       - 20012:27017
-    networks:
-      - mongo-net
+
 
   shard1arbiter:
     image: mongo:${MONGE_TAG}
@@ -139,8 +131,7 @@ services:
       - ./mongodb/data-mongo13:/data/db
     ports:
       - 20013:27017
-    networks:
-      - mongo-net
+
 
   shard2primary:
     image: mongo:${MONGE_TAG}
@@ -155,8 +146,7 @@ services:
       - ./mongodb/data-mongo21:/data/db
     ports:
       - 20021:27017
-    networks:
-      - mongo-net
+
 
   shard2secondary:
     image: mongo:${MONGE_TAG}
@@ -171,8 +161,7 @@ services:
       - ./mongodb/data-mongo22:/data/db
     ports:
       - 20022:27017
-    networks:
-      - mongo-net
+
 
   shard2arbiter:
     image: mongo:${MONGE_TAG}
@@ -187,8 +176,7 @@ services:
       - ./mongodb/data-mongo23:/data/db
     ports:
       - 20023:27017
-    networks:
-      - mongo-net
+
 
 #  ### mongo-express
 #  mongo-express:
