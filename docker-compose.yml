@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+
+  ### Mongodb Servers
+  mongo1:
+    image: anti1346/mongo:5.0.8
+    container_name: mongo1
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - TZ=Asia/Seoul
+    command: mongod --auth --replSet rs1 --keyFile /data/key/mongo.key --dbpath /data/db --bind_ip_all
+    volumes:
+      - ./mongodb/data-mongo1:/data/db
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    networks:
+      - mongo-net
+
+
+  ### mongo-express
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo1:27017/
+    depends_on:
+      - mongo1
+    ports:
+      - 8080:8081
+    expose:
+      - 8081
+    networks:
+      - mongo-net
+
+
+networks:
+  mongo-net:
