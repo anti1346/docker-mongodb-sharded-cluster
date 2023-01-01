@@ -105,7 +105,7 @@ services:
 
   shard1secondary:
     image: mongo:${MONGE_TAG}
-    container_name: shard1primary
+    container_name: shard1secondary
     restart: unless-stopped
     env_file:
       - .env
@@ -120,7 +120,7 @@ services:
 
   shard1arbiter:
     image: mongo:${MONGE_TAG}
-    container_name: shard1primary
+    container_name: shard1arbiter
     restart: unless-stopped
     env_file:
       - .env
@@ -135,7 +135,7 @@ services:
 
   shard2primary:
     image: mongo:${MONGE_TAG}
-    container_name: shard1primary
+    container_name: shard2primary
     restart: unless-stopped
     env_file:
       - .env
@@ -150,7 +150,7 @@ services:
 
   shard2secondary:
     image: mongo:${MONGE_TAG}
-    container_name: shard1primary
+    container_name: shard2secondary
     restart: unless-stopped
     env_file:
       - .env
@@ -165,7 +165,7 @@ services:
 
   shard2arbiter:
     image: mongo:${MONGE_TAG}
-    container_name: shard1primary
+    container_name: shard2arbiter
     restart: unless-stopped
     env_file:
       - .env
