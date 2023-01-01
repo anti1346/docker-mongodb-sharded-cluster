@@ -108,17 +108,15 @@ services:
     image: mongo:${MONGE_TAG}
     container_name: shard1primary
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo11:/data/db
-    depends_on:
-      - config1
-      - config2
-      - config3
+#    depends_on:
+#      - config1
+#      - config2
+#      - config3
     ports:
       - 20011:27017
 
@@ -127,17 +125,15 @@ services:
     image: mongo:${MONGE_TAG}
     container_name: shard1secondary
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo12:/data/db
-    depends_on:
-      - config1
-      - config2
-      - config3
+#    depends_on:
+#      - config1
+#      - config2
+#      - config3
     ports:
       - 20012:27017
 
@@ -146,17 +142,15 @@ services:
     image: mongo:${MONGE_TAG}
     container_name: shard1arbiter
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs1 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo13:/data/db
-    depends_on:
-      - config1
-      - config2
-      - config3
+#    depends_on:
+#      - config1
+#      - config2
+#      - config3
     ports:
       - 20013:27017
 
@@ -165,17 +159,15 @@ services:
     image: mongo:${MONGE_TAG}
     container_name: shard2primary
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo21:/data/db
-    depends_on:
-      - config1
-      - config2
-      - config3
+#    depends_on:
+#      - config1
+#      - config2
+#      - config3
     ports:
       - 20021:27017
 
@@ -184,17 +176,15 @@ services:
     image: mongo:${MONGE_TAG}
     container_name: shard2secondary
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo22:/data/db
-    depends_on:
-      - config1
-      - config2
-      - config3
+#    depends_on:
+#      - config1
+#      - config2
+#      - config3
     ports:
       - 20022:27017
 
@@ -203,17 +193,15 @@ services:
     image: mongo:${MONGE_TAG}
     container_name: shard2arbiter
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       - TZ=Asia/Seoul
     command: mongod --shardsvr --replSet rs2 --port 27017 --dbpath /data/db --bind_ip_all
     volumes:
       - ./mongodb/data-mongo23:/data/db
-    depends_on:
-      - config1
-      - config2
-      - config3
+#    depends_on:
+#      - config1
+#      - config2
+#      - config3
     ports:
       - 20023:27017
 
