@@ -13,6 +13,10 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
       - TZ=Asia/Seoul
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 27017:27017
 
@@ -28,6 +32,10 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
       - TZ=Asia/Seoul
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 27018:27017
 
@@ -43,10 +51,16 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
       - TZ=Asia/Seoul
     command: mongos --configdb configReplica/config1:10011,config2:10012,config3:10013 --bind_ip 0.0.0.0 --port 27017
+    depends_on:
+      - config1
+      - config2
+      - config3
     ports:
       - 27019:27017
 
-
+######################################################################################################################
+######################################################################################################################
+######################################################################################################################
   ### Mongodb Config Servers
   config1:
     image: mongo:${MONGE_TAG}
@@ -86,7 +100,9 @@ services:
     ports:
       - 10013:27017
 
-
+######################################################################################################################
+######################################################################################################################
+######################################################################################################################
   ### Mongodb Shard Servers
   shard1primary:
     image: mongo:${MONGE_TAG}
